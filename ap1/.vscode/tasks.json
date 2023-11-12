@@ -1,0 +1,19 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "go: run package",
+			"command": "go",
+			"args": [
+				"run",
+				"main.go"
+			],
+			"problemMatcher": [
+				"$go"
+			],
+			"group": "build",
+			"detail": "cd c:\\Projetos\\ed-2023.2\\turma_3\\09-pacotes"
+		}
+	]
+}
