@@ -15,7 +15,7 @@ type Produto struct {
 Define um id de um produto, considerando todos os produtos já cadastrados.
 */
 func (p *Produto) definirId() {
-	TotalProdutosJaCadastrados++
+	//TotalProdutosJaCadastrados++
 	p.Id = TotalProdutosJaCadastrados
 }
 
@@ -35,6 +35,9 @@ pré-definido.
 */
 func criar(nome, descricao string, preco float64, id int) Produto {
 	p := Produto { Nome: nome, Descricao: descricao, Preco: preco }
+
+	TotalProdutosJaCadastrados++ // conserta bug
+
 	if id == -1 {
 		p.definirId()
 	} else {

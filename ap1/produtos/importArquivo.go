@@ -34,10 +34,11 @@ func LerArquivo() {
 		preco, _ := strconv.ParseFloat(linha[3], 64)
 
 		ret := AdicionarUnico(nome, descricao, preco, id)
+		
 		if ret < 0 {
 			fmt.Println("Ocorreu um erro ao adicionar o produto:", id, nome)
 		}
 	}
-
+	
 	fmt.Printf("Leitura de arquivo concluída! Iniciando programa...\n\n\n")
 }

@@ -45,6 +45,10 @@ func excluir() Pedido {
 		return Pedido{}
 	} // Underflow
 
+	if inicioFila == -1 && fimFila == -1 && totalPedidos <= maxPedidos { // conserta bug
+		return Pedido{}
+	}
+
 	pedidoRemovido := Pedidos[inicioFila]
 	Pedidos[inicioFila] = Pedido{}
 
@@ -72,7 +76,7 @@ func Expedir() int {
 	if (pedidoExpedido == Pedido{}) {
 		return -1
 	}
-
+	
 	timeStampExpedicao := time.Now()
 	fmt.Println("\nPedido entregue!")
 	fmt.Println(timeStampExpedicao.Format("02/01/2006 15:04"))
@@ -93,7 +97,7 @@ func Exibir() {
 	}
 
 	i := inicioFila
-
+	
 	for {
 		if (Pedidos[i] == Pedido{}) { break }
 		Pedidos[i].exibir()
