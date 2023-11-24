@@ -40,4 +40,11 @@ func (m *Metricas) ExibirMetricas() {
 	fmt.Println("Número de pedidos encerrados:", m.pedidosEncerrados)
 	fmt.Printf("Tempo médio para expedição de pedidos (em min): %.2f\n", m.tempoMedioExpedicao)
 	fmt.Printf("Faturamento total: R$ %.2f\n", m.faturamentoTotal)
+	// Requisito funcional 2
+	if m.pedidosEncerrados > 0 {
+        ticketMedio := m.faturamentoTotal / float64(m.pedidosEncerrados)
+        fmt.Printf("Ticket médio: R$%.2f\n", ticketMedio)
+    } else {
+        fmt.Println("Ticket médio: R$0.00 (nenhum pedido encerrado)")
+    }
 }

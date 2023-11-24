@@ -22,6 +22,8 @@ func opcoes() {
 	fmt.Println("6 - Adicionar pedido;")
 	fmt.Println("7 - Expedir pedido;")
 	fmt.Println("8 - Exibir métricas do sistema;")
+	fmt.Println("9 - *NEW* Atualizar preço de um produto;")
+	fmt.Println("10 - *NEW* Exibir produtos por nome;")
 	fmt.Println("20 - Exibir todos os pedidos em andamento;")
 	fmt.Println("21 - Cadastrar produtos em lote;")
 	fmt.Println("100 - Sair do programa;")
@@ -51,6 +53,10 @@ func Cli() {
 			pedidos.Expedir()
 		case "8":
 			metricas.M.ExibirMetricas()
+		case "9":
+			atualizarPrecoProduto()
+		case "10":
+			produtos.ListarProdutosPorNome()
 		case "20":
 			pedidos.Exibir()
 		case "21":
@@ -173,5 +179,18 @@ func cadastrarProdutosEmLote() {
 		if opcao != "s" {
 			break
 		}
+	}
+}
+
+// Requisito funcional 1
+func atualizarPrecoProduto() {
+	id := leInt("Informe o ID do produto: ")
+	novoPreco := leFloat("Informe o novo preço do produto: ")
+
+	ret := produtos.AtualizarPrecoProduto(id, novoPreco)
+	if ret {
+		fmt.Println("Preço do produto atualizado com sucesso!")
+	} else {
+		fmt.Println("Erro ao atualizar o preço do produto.")
 	}
 }

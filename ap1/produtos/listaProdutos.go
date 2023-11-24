@@ -107,3 +107,38 @@ func Excluir(id int) int {
 	m.M.SomaProdutosCadastrados(-1)
 	return 0
 }
+
+// Requisito funcional 3/Requisito não-funcional 2
+func bubblesort(objetos []Produto) {
+    trocou := true
+    limite := len(objetos)
+
+    for trocou {
+        trocou = false
+        limite--
+        for i := 0; i < limite; i++ {
+            // Use o campo "Nome" para a comparação
+            if objetos[i].Nome > objetos[i+1].Nome {
+                objetos[i], objetos[i+1] = objetos[i+1], objetos[i]
+                trocou = true
+            }
+        }
+    }
+}
+
+// Requisito funcional 3/Requisito não-funcional 2
+func ListarProdutosPorNome() {
+	var produtosNaoNulos []Produto
+
+    for _, produto := range Produtos {
+        if (produto != Produto{}) {
+            produtosNaoNulos = append(produtosNaoNulos, produto)
+        }
+    }
+
+	bubblesort(produtosNaoNulos)
+
+	for _, produto := range produtosNaoNulos {
+		produto.Exibir()
+	}
+}

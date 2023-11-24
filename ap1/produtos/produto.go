@@ -46,3 +46,13 @@ func criar(nome, descricao string, preco float64, id int) Produto {
 
 	return p
 }
+ // Requisito funcional 1
+func AtualizarPrecoProduto(id int, novoPreco float64) bool {
+    for i, produto := range Produtos {
+        if produto.Id == id {
+            Produtos[i].Preco = novoPreco
+            return true
+        }
+    }
+    return false
+}
