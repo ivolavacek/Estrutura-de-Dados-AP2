@@ -33,6 +33,7 @@ func (m *Metricas) AtualizaExpedicao(novoTempo int, valorVenda float64) {
 	m.pedidosEncerrados++
 	m.tempoMedioExpedicao = tempoTotalExpedicao / float64(m.pedidosEncerrados)
 	m.faturamentoTotal += valorVenda
+	m.ticketMedio = m.faturamentoTotal / float64(m.pedidosEncerrados)
 }
 
 func (m *Metricas) ExibirMetricas() {
