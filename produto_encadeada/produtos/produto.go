@@ -1,9 +1,10 @@
 package produtos
 
 import "fmt"
+//import "sort"
 
 var TotalProdutosJaCadastrados = 0
-var listaDeProdutos Lista
+var ListaDeProdutos Lista
 
 type Produto struct {
 	Id        int
@@ -54,7 +55,7 @@ func criar(nome, descricao string, preco float64, id int) Produto {
 		p.Id = id
 	}
 
-	listaDeProdutos.insere(p)
+	ListaDeProdutos.insere(p)
 
 	return p
 }
@@ -83,5 +84,36 @@ func (l *Lista) insere(novoProduto Produto) {
         }
 
         pont.prox = novoNo
+    }
+}
+
+
+func (l *Lista) OrdenarPorNome() {
+    if l.ptlista == nil || l.ptlista.prox == nil {
+        return // A lista está vazia ou tem apenas um elemento
+    }
+
+    trocado := true
+    for trocado {
+        trocado = false
+        ptr := l.ptlista
+        for ptr.prox != nil {
+            if ptr.produto.Nome > ptr.prox.produto.Nome {
+                // Troca os produtos
+                ptr.produto, ptr.prox.produto = ptr.prox.produto, ptr.produto
+                trocado = true
+            }
+            ptr = ptr.prox
+        }
+    }
+}
+
+
+func (l *Lista) ExibirProdutosPorNome() {
+    l.OrdenarPorNome() // Primeiro ordena a lista pelo nome
+
+    // Depois, exibe os produtos como antes
+    for no := l.ptlista; no != nil; no = no.prox {
+        fmt.Printf("Id: %d, Nome: %s, Descrição: %s, Preço: %.2f\n", no.produto.Id, no.produto.Nome, no.produto.Descricao, no.produto.Preco)
     }
 }

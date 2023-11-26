@@ -56,8 +56,7 @@ func Cli() {
 		case "9":
 			atualizarPrecoProduto()
 		case "10":
-			// produtos.ListarProdutosPorNome()
-			fmt.Println("Implementar com encadeamento")
+			produtos.ListaDeProdutos.ExibirProdutosPorNome()
 		case "20":
 			pedidos.Exibir()
 		case "21":
@@ -195,3 +194,4 @@ func atualizarPrecoProduto() {
 		fmt.Println("Erro ao atualizar o preço do produto.")
 	}
 }
+
