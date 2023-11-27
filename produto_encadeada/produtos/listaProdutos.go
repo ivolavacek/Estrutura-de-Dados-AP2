@@ -51,10 +51,10 @@ Retorna o produto encontrado e a sua posição na lista, em caso de sucesso.
 Retorna um produto vazio e -1 em caso de erro.
 */
 func BuscarId(id int) (Produto, int) {
-	for ind, produto := range Produtos {
-		if (produto == Produto{}) { break }
-		if produto.Id == id {
-			return produto, ind
+	for no := ListaDeProdutos.ptlista; no != nil; no = no.prox {
+		if (no.produto == Produto{}) { break }
+		if no.produto.Id == id {
+			return no.produto, no.produto.Id
 		}
 	}
 
@@ -68,13 +68,14 @@ Retorna um slice com todos os produtos encontrados, e o tamanho do slice.
 func BuscarNome(comecaCom string) ([]Produto, int) {
 	var produtosEncontrados []Produto
 
-	for _, produto := range Produtos {
-		if (produto == Produto{}) { break }
+	for no := ListaDeProdutos.ptlista; no != nil; no = no.prox {
+        if (no.produto == Produto{}) { break }
 
-		if strings.HasPrefix(produto.Nome, comecaCom) {
-			produtosEncontrados = append(produtosEncontrados, produto)
+		if strings.HasPrefix(no.produto.Nome, comecaCom) {
+			produtosEncontrados = append(produtosEncontrados, no.produto)
 		}
-	}
+    }
+
 	return produtosEncontrados, len(produtosEncontrados)
 }
 
@@ -82,10 +83,10 @@ func BuscarNome(comecaCom string) ([]Produto, int) {
 Exibe todos os produtos cadastrados.
 */
 func Exibir() {
-	for _, produto := range Produtos {
-		if (produto == Produto{}) { break }
-		produto.Exibir()
-	}
+	for no := ListaDeProdutos.ptlista; no != nil; no = no.prox {
+        if (no.produto == Produto{}) { break }
+		no.produto.Exibir()
+    }
 }
 
 /*
