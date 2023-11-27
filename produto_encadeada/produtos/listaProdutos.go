@@ -94,17 +94,46 @@ Remove um produto da lista a partir do seu id.
 Retorna -2 caso não haja produtos na lista.
 Retorna -1 caso não haja um produto com o id passado, ou 0 em caso de sucesso.
 */
+
 func Excluir(id int) int {
 	if totalProdutos == 0 { return -2 }
 
-	_, ind := BuscarId(id)
-	if ind == -1 { return -1 }
+	_, idProcurado := BuscarId(id)
+	if idProcurado == -1 { return -1 }
 
-	for i := ind; i < totalProdutos - 1; i++ {
-		Produtos[i] = Produtos[i + 1]
-	}
+	ListaDeProdutos.RemovePorId(id)
 	totalProdutos--
-	Produtos[totalProdutos] = Produto{}
+
 	m.M.SomaProdutosCadastrados(-1)
 	return 0
+}
+
+func (l *Lista) RemovePorId(id int) Produto {
+    ant, ptr := l.buscaPorId(id) // Esta função precisa ser definida para buscar o produto pelo ID
+
+    if ptr == nil {
+        return Produto{} // Produto não encontrado
+    }
+
+    if ant == nil {
+        // O produto a ser removido é o primeiro da lista
+        l.ptlista = ptr.prox
+    } else {
+        // O produto a ser removido está no meio ou no final da lista
+        ant.prox = ptr.prox
+    }
+
+    return ptr.produto // Retorna o produto removido
+}
+
+func (l *Lista) buscaPorId(id int) (*No, *No) {
+    var ant *No
+    ptr := l.ptlista
+
+    for ptr != nil && ptr.produto.Id != id {
+        ant = ptr
+        ptr = ptr.prox
+    }
+
+    return ant, ptr
 }

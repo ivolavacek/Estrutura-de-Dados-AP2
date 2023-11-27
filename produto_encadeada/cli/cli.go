@@ -123,8 +123,8 @@ func removerProduto() {
 func buscarProdutoId() {
 	id := leInt("Informe o id do produto a ser buscado: ")
 
-	produtoEncontrado, indice := produtos.BuscarId(id)
-	if indice == -1 {
+	produtoEncontrado, id := produtos.BuscarId(id)
+	if id == -1 {
 		fmt.Println("Erro! Produto buscado não existe.")
 	} else {
 		produtoEncontrado.Exibir()
