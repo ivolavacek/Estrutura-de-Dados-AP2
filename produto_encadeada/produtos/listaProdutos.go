@@ -7,7 +7,6 @@ import (
 
 const maxProdutos = 50
 
-var Produtos [maxProdutos]Produto
 var totalProdutos = 0
 
 func tentarCriar(nome, descricao string, preco float64, id int) Produto {
@@ -29,17 +28,16 @@ Retorna -1 caso a lista esteja cheia, ou o número de produtos cadastrados em ca
 func AdicionarUnico(nome, descricao string, preco float64, id int) int {
 	if totalProdutos == maxProdutos { return -1 } // Overflow
 
-	for _, produto := range Produtos {
-		if (produto == Produto{}) { break }
-		if produto.Nome == nome {
+	for no := ListaDeProdutos.ptlista; no != nil; no = no.prox {
+        if (no.produto == Produto{}) { break }
+		if no.produto.Nome == nome {
 			return -2
 		}
-	}
+    }
 
 	produtoCriado := tentarCriar(nome, descricao, preco, id)
 	if (produtoCriado == Produto{}) { return -3 }
 
-	Produtos[totalProdutos] = produtoCriado
 	totalProdutos++
 	m.M.SomaProdutosCadastrados(1)
 	return totalProdutos
