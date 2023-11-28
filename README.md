@@ -45,7 +45,13 @@ Para a ordenação dos produtos por nome foi feita uma nova função onde serão
 
 ### Transformação da lista sequencial em lista encadeada
 
-
+Para a transformação da lista de produtos sequencial para uma lista encadeada, começamos criando 2 structs: um struct "No" com 2 atributos ("produto" do tipo Produto e um "prox" com o endereço de um outro "No") e um outro struct do tipo "Lista", com um atributo "ptlista" (que é o endereço do primeiro ponteiro da lista).
+Foi criada então a variável "ListaDeProdutos", do tipo Lista, para substituir a variável "Produtos".
+A primeira função implementada para a substituição entre essas variáveis foi a função "insere" em produto.go e a chamada dessa função dentro da função "criar" no mesmo arquivo produto.go, assim já pudemos acessar a lista encadeada de qualquer lugar do código.
+Em seguida fizemos a função "OrdenarPorNome", usando como base o material dado em aula sobre listas encadeadas, e a função "ExibirProdutosPorNome" que chama a função de ordenação, usa um "for" para interar sobre cada nó da lista e imprime o que está nesse endereço de nó usando, por exemplo, "no.produto.Id" para o Id de cada produto.
+No código, principalmente nos arquivos produto.go e listaProdutos.go, há várias funções que interam sobre a variável Produtos usando algo parecido com "for produto := range Produtos", esse "for" deve ser corrigido para em todos os lugares do código ser usado a lista de produtos encadeada, e não a sequencial. Então fizemos a troca por algo parecido com "for no := ListaDeProdutos.ptlista; no != nil; no = no.prox", permitindo interar pela variável "ListaDeProdutos" que contém os nós que contém os produtos. Sendo assim, para interagir pelos produtos em si, as funções precisam chamar "no.produto", e para acessar os atributos de Produto, é preciso chamar, pro exemplo, no.produto.Nome para nome do produto ou no.produto.Id para o Id do produto.
+Para todo o código rodar considerando a lista encadeada, foi necessário mais a criação de 2 funções, ambas para auxiliar a remoção de produtos, estas são "RemovePorId" e "buscaPorId".
+A função "Excluir" em listaProdutos.go verifica se o Id passado como atributo é válido para exclusão, então chama a função "RemovePorId" que, por sua vez chama "buscaPorId". Esta última retorna os nós adjacentes ao nó que representa o produto com Id especificado, e então a função "RemovePorId" ajusta a variável "ListaDeProdutos", removendo o nó do produto específico, mas garantindo a integridade da lista encadeada.
 
 ### Correção do Bug 1
 
